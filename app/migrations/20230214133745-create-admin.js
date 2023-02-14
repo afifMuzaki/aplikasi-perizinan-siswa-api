@@ -7,19 +7,20 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(11)
       },
       nama: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       },
       username: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       },
       role: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(15),
+        defaultValue: 'admin'
       },
       createdAt: {
         allowNull: false,

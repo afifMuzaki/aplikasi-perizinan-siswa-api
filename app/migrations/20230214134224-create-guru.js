@@ -6,19 +6,20 @@ module.exports = {
       nip: {
         primaryKey: true,
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(11)
       },
       nama: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       },
       username: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       },
       password: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(30)
       },
       role: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(15),
+        defaultValue: 'guru'
       },
       createdAt: {
         allowNull: false,
