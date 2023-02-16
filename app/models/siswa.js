@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Siswa.init({
     nis: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(30),
       unique: true,
       allowNull: false
     },

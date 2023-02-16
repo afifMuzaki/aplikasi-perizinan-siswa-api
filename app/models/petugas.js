@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Petugas.init({
     nip: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING(30),
       unique: true,
       allowNull: false
     },

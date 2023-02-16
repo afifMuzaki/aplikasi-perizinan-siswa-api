@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Izin.init({
-    siswaNis: DataTypes.INTEGER,
-    guruNip: DataTypes.INTEGER,
-    kategoriId: DataTypes.INTEGER,
+    siswaNis: DataTypes.STRING,
+    guruNip: DataTypes.STRING,
+    kategoriId: DataTypes.STRING,
     mapel: DataTypes.JSON,
     alasan: DataTypes.TEXT,
     waktu_izin: DataTypes.TIME,

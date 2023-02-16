@@ -14,6 +14,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Admin.init({
+    adminNum: {
+      type: DataTypes.STRING(30),
+      unique: true,
+      allowNull: false
+    },
     nama: DataTypes.STRING(30),
     username: DataTypes.STRING(30),
     password: DataTypes.STRING(30),

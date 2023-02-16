@@ -1,7 +1,4 @@
 'use strict';
-
-const { NOW } = require('sequelize');
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -11,6 +8,11 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      adminNum: {
+        type: Sequelize.STRING(30),
+        unique: true,
+        allowNull: false
       },
       nama: {
         type: Sequelize.STRING(30)

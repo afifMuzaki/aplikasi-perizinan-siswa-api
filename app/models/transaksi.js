@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Transaksi.init({
     izinId: DataTypes.INTEGER,
-    guruNip: DataTypes.INTEGER,
-    petugasNip: DataTypes.INTEGER,
+    guruNip: DataTypes.STRING,
+    petugasNip: DataTypes.STRING,
     izin_guru: DataTypes.BOOLEAN,
     izin_petugas: DataTypes.BOOLEAN
   }, {
