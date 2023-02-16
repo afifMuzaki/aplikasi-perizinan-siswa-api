@@ -1,9 +1,8 @@
 // Modules
 const express = require('express');
 const dotenv = require('dotenv');
-
 // Router
-const test = require('./app/routes/siswa')
+const router = require('./app/routes/router')
 
 dotenv.config();
 const app = express();
@@ -13,6 +12,6 @@ const host = process.env.HOST;
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-app.use(test)
+app.use(router.siswaRouter);
 
 app.listen(port, host, () => console.log(`Server run on http://${host}:${port}`));
