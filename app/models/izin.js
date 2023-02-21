@@ -1,7 +1,9 @@
 'use strict';
 const {
-  Model
+  Model, where
 } = require('sequelize');
+// const db = require('.');
+// const transaksi = db.Transaksi;
 module.exports = (sequelize, DataTypes) => {
   class Izin extends Model {
     /**
@@ -14,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Izin.init({
+    // id: DataTypes.INTEGER,
     siswaNis: DataTypes.STRING,
     guruNip: DataTypes.STRING,
     kategoriId: DataTypes.STRING,
@@ -26,6 +29,19 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Izin',
   });
-  module.exports = Izin;
+
+  Izin.afterCreate(async (instance, option) => {
+    const transaksi = sequelize.models.Transaksi;
+    const izin = sequelize.models.Izin
+
+    const data = {
+      izinId: instance.id,
+      guruNip: instance.guruNip,
+      petugasNip: null,
+      izin_guru: false,
+      izin_petugas: false
+    };
+    await transaksi.create(data, { transaction: option.transaction });
+  });
   return Izin;
 };

@@ -1,5 +1,6 @@
-const { request, response } = require("express")
-const Izin = require("../models/izin")
+const { request, response } = require("express");
+const db = require("../models");
+const izinModel = db.Izin;
 
 class Perizinan {
     async entriIzin(req = request, res = response) {
@@ -9,7 +10,7 @@ class Perizinan {
         const { nipGuru, idKategori, pelajaran, alasanIzin, waktuIzin, waktuKembali } = req.body;
 
         try {
-            await Izin.create({
+            await izinModel.create({
                 siswaNis: kredensial,
                 guruNip: nipGuru,
                 kategoriId: idKategori,
@@ -19,6 +20,17 @@ class Perizinan {
                 waktu_kembali: waktuKembali
             });
 
+            // Izin.afterCreate(async (instance, option) => {
+            //     const data = {
+            //         izinId: instance.izinId,
+            //         guruNip: instance.guruNip,
+            //         petugasNip: null,
+            //         izin_guru: false,
+            //         izin_petugas: false
+            //     };
+            //     await Transaksi.create(data, {transaction: option.transaction});
+            // });
+
             res.send('Izin sedang diajukan, silahkan tunggu persetujuan');
         } catch (err) {
             res.sendStatus(401);
@@ -27,7 +39,7 @@ class Perizinan {
     }
 
     getAllIzins(req = request, res = response) {
-        Izin.findAll({
+        izinModel.findAll({
             attributes: ['siswaNis', 'guruNip', 'kategoriId', 'mapel', 'alasan', 'waktu_izin', 'waktu_kembali', 'tggl']
         }).then(izins => {
             res.json({ message: 'Data Izin', data: izins });
