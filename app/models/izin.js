@@ -26,5 +26,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Izin',
   });
+  module.exports = Izin;
   return Izin;
 };
