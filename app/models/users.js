@@ -1,18 +1,27 @@
-const { Sequelize, DataTypes } = require("sequelize");
-
-const sequelize = new Sequelize('sipsis', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
-});
-
-const userView = sequelize.define(users, {
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Users extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  Users.init({
     kredensial: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    role: DataTypes.STRING 
-}, {
-    tableName: 'users',
-    timestamps: false
-});
-
-module.exports = userView;
+    role: DataTypes.STRING,
+    refresh_token: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Users',
+  });
+  return Users;
+};
