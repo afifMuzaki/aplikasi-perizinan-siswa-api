@@ -1,46 +1,41 @@
-const db = require('../models');
-const siswa = db.Siswa;
+const { request, response } = require("express");
+const db = require("../models");
+const izinModel = db.Izin;
 
-class Siswa {
-    async getSiswa(req, res) {
-        try {
-            const data = await siswa.findAll();
-            res.json({
-                status: "ok",
-                message: "Data siswa berhasil didapat",
-                data: data,
-            });
-        } catch (err) {
-            res.json({
-                message: "Data tidak ditemukan!",
-                data: []
-            });
-            console.log(err);
-        }
-    };
+class Perizinan {
+    async entriIzin(req = request, res = response) {
+        const { kredensial, username, role } = req;
+        if (role != 'siswa') return res.sendStatus(403);
 
-    async addSiswa(req, res) {
-        let {nis, nama, kls, username, password} = req.body;
+        const { nipGuru, idKategori, pelajaran, alasanIzin, waktuIzin, waktuKembali } = req.body;
 
         try {
-            await siswa.create({
-                nis: nis,
-                nama: nama,
-                kls: kls,
-                username: username,
-                password: password,
+            await izinModel.create({
+                siswaNis: kredensial,
+                guruNip: nipGuru,
+                kategoriId: idKategori,
+                mapel: pelajaran,
+                alasan: alasanIzin,
+                waktu_izin: waktuIzin,
+                waktu_kembali: waktuKembali
             });
-            res.json({
-                status: 'ok',
-                message: 'Data berhasil ditambahkan!'
-            })
+
+            res.send('Izin sedang diajukan, silahkan tunggu persetujuan');
         } catch (err) {
-            res.json({
-                message: 'Data gagal ditambahkan'
-            });
+            res.sendStatus(401);
             console.log(err);
         }
     }
+
+    getAllIzins(req = request, res = response) {
+        izinModel.findAll({
+            attributes: ['siswaNis', 'guruNip', 'kategoriId', 'mapel', 'alasan', 'waktu_izin', 'waktu_kembali', 'tggl']
+        }).then(izins => {
+            res.json({ message: 'Data Izin', data: izins });
+        }).catch(err => {
+            console.log(err);
+        });
+    }
 }
 
-module.exports = Siswa;
+module.exports = Perizinan;
