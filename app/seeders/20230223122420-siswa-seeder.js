@@ -7,21 +7,21 @@ module.exports = {
       {
         nis: '20667/1220.065',
         nama: 'M. Afif Muzaki',
-        kls: 'XII RPL B',
+        kelasId: 1,
         username: 'siswa1',
         password: 'siswa1'
       },
       {
         nis: '20668/1220.066',
         nama: 'Ahmad Sutigno',
-        kls: 'XII RPL B',
+        kelasId: 2,
         username: 'siswa2',
         password: 'siswa2'
       },
       {
         nis: '20669/1220.067',
         nama: 'Jhon Doe',
-        kls: 'XII RPL B',
+        kelasId: 3,
         username: 'siswa3',
         password: 'siswa3'
       }

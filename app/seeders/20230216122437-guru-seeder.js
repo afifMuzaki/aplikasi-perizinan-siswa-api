@@ -8,13 +8,15 @@ module.exports = {
         nip: '19770407 198703 2 005',
         nama: 'Guru 1',
         username: 'guru1',
-        password: 'guru1'
+        password: 'guru1',
+        mapelId: 2
       },
       {
         nip: '19830807 199903 6 012',
         nama: 'Guru 2',
         username: 'guru2',
-        password: 'guru2'
+        password: 'guru2',
+        mapelId: 1
       },
     ], {});
   },

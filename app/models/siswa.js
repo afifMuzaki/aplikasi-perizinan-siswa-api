@@ -17,7 +17,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
 
-      
+      this.belongsTo(models.kelas, {
+        targetKey: 'id',
+        foreignKeyConstraint: 'kelasId',
+        onUpdate: 'CASCADE',
+        onUpdate: 'CASCADE'
+      });
     }
   }
   Siswa.init({
