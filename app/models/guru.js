@@ -10,7 +10,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.hasMany(models.izin, {
+        sourceKey: 'nip',
+        foreignKey: 'guruNip',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
+
+      this.hasMany(models.transaksi, {
+        sourceKey: 'nip',
+        foreignKey: 'guruNip',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
+
+      this.belongsToMany(models.mapel, {
+        targetKey: 'id',
+        foreignKey: 'mapelId',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Guru.init({
@@ -22,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     nama: DataTypes.STRING(30),
     username: DataTypes.STRING(30),
     password: DataTypes.STRING(30),
+    mapelId: DataTypes.INTEGER,
     role: {
       type: DataTypes.STRING(15),
       defaultValue: 'guru'

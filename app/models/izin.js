@@ -12,11 +12,36 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.belongsToMany(models.siswa, {
+        targetKey: 'nis',
+        foreignKey: 'siswaNis',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
+
+      this.belongsToMany(models.guru, {
+        targetKey: 'nip',
+        foreignKey: 'guruNip',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
+
+      this.belongsToMany(models.kategori, {
+        targetKey: 'id',
+        foreignKey: 'kategoriId',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
+
+      this.hasOne(models.transaksi, {
+        sourceKey: 'id',
+        foreignKey: 'izinId',
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
+      });
     }
   }
   Izin.init({
-    // id: DataTypes.INTEGER,
     siswaNis: DataTypes.STRING,
     guruNip: DataTypes.STRING,
     kategoriId: DataTypes.STRING,

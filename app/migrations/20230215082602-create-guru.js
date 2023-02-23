@@ -23,6 +23,9 @@ module.exports = {
       password: {
         type: Sequelize.STRING(30)
       },
+      mapelId: {
+        type: Sequelize.INTEGER
+      },
       role: {
         type: Sequelize.STRING(15),
         defaultValue: 'guru'
