@@ -2,7 +2,7 @@ const { request, response } = require("express");
 const db = require("../models");
 const izinModel = db.Izin;
 
-class Perizinan {
+class Siswa {
     async entriIzin(req = request, res = response) {
         const { kredensial, username, role } = req;
         if (role != 'siswa') return res.sendStatus(403);
@@ -38,4 +38,4 @@ class Perizinan {
     }
 }
 
-module.exports = Perizinan;
+module.exports = Siswa;

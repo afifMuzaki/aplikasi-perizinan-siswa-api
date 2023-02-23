@@ -23,5 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Transaksi',
   });
+  module.exports = Transaksi;
   return Transaksi;
 };
