@@ -2,6 +2,9 @@
 const {
   Model
 } = require('sequelize');
+const izin = require('./izin');
+const transaksi = require('./transaksi');
+const mapel = require('./mapel');
 module.exports = (sequelize, DataTypes) => {
   class Guru extends Model {
     /**
@@ -10,21 +13,24 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.hasMany(models.izin, {
+      this.hasMany(models.Izin, {
+        as: 'guru-izin',
         sourceKey: 'nip',
         foreignKey: 'guruNip',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       });
 
-      this.hasMany(models.transaksi, {
+      this.hasMany(models.Transaksi, {
+        as: 'guru-transaksi',
         sourceKey: 'nip',
         foreignKey: 'guruNip',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       });
 
-      this.belongsToMany(models.mapel, {
+      this.belongsTo(models.Mapel, {
+        as: 'guru-mapel',
         targetKey: 'id',
         foreignKey: 'mapelId',
         onUpdate: 'CASCADE',

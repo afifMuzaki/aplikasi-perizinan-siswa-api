@@ -10,21 +10,24 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.izin, {
+      this.belongsTo(models.Izin, {
+        as: 'transaksi-izin',
         targetKey: 'id',
         foreignKey: 'izinId',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       });
 
-      this.belongsToMany(models.guru, {
+      this.belongsTo(models.Guru, {
+        as: 'transaksi-guru',
         targetKey: 'nip',
         foreignKey: 'guruNip',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       });
 
-      this.belongsToMany(models.petugas, {
+      this.belongsTo(models.Petugas, {
+        as: 'transaksi-petugas',
         targetKey: 'nip',
         foreignKey: 'petugasNip',
         onUpdate: 'CASCADE',

@@ -24,7 +24,11 @@ module.exports = {
         type: Sequelize.STRING(30)
       },
       mapelId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Mapels',
+          key: 'id'
+        }
       },
       role: {
         type: Sequelize.STRING(15),
