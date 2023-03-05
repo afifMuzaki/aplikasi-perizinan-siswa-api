@@ -40,7 +40,9 @@ module.exports = (sequelize, DataTypes) => {
     guruNip: DataTypes.STRING,
     petugasNip: DataTypes.STRING,
     izin_guru: DataTypes.BOOLEAN,
-    izin_petugas: DataTypes.BOOLEAN
+    izin_petugas: DataTypes.BOOLEAN,
+    catatan_guru: DataTypes.TEXT,
+    catatan_petugas: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Transaksi',

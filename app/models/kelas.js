@@ -10,26 +10,31 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.hasMany(models.Jurusan, {
+      this.belongsTo(models.Jurusan, {
         as: 'kelas-jurusan',
-        sourceKey: 'id',
         foreignKey: 'jurusanId',
+        targetKey: 'id',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       });
 
       this.hasMany(models.Siswa, {
         as: 'kelas-siswa',
-        sourceKey: 'id',
         foreignKey: 'kelasId',
+        sourceKey: 'id',
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      });
+
+      this.belongsToMany(models.Mapel, {
+        through: models.KelasMapel
       });
     }
   }
   Kelas.init({
     kelas: DataTypes.STRING(8),
-    jurusanId: DataTypes.INTEGER
+    jurusanId: DataTypes.INTEGER,
+    rombel: DataTypes.ENUM('A', 'B', 'C', 'D')
   }, {
     sequelize,
     modelName: 'Kelas',

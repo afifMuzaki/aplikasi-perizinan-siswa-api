@@ -5,16 +5,13 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Jurusans', [
       {
-        jurusan: 'RPL',
-        rombel: 'B'
+        jurusan: 'RPL'
       },
       {
-        jurusan: 'DPIB',
-        rombel: 'C'
+        jurusan: 'DPIB'
       },
       {
-        jurusan: 'TPM',
-        rombel: 'A'
+        jurusan: 'TPM'
       }
     ], {});
   },

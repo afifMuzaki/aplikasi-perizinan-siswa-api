@@ -3,25 +3,22 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Mapel extends Model {
+  class KelasMapel extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-
-      this.belongsToMany(models.Kelas, {
-        through: models.KelasMapel
-      });
+      // define association here
     }
   }
-  Mapel.init({
-    mapel: DataTypes.STRING(25),
-    kelasId: DataTypes.INTEGER
+  KelasMapel.init({
+    kelasId: DataTypes.INTEGER,
+    mapelId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Mapel',
+    modelName: 'KelasMapel',
   });
-  return Mapel;
+  return KelasMapel;
 };

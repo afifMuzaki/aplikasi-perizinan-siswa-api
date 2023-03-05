@@ -9,11 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      satpamNum: {
-        allowNull: false,
-        unique: true,
-        type: Sequelize.STRING(30)
-      },
       nama: {
         type: Sequelize.STRING(30)
       },

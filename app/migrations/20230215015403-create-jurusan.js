@@ -12,9 +12,6 @@ module.exports = {
       jurusan: {
         type: Sequelize.STRING(30)
       },
-      rombel: {
-        type: Sequelize.ENUM(['A', 'B', 'C', 'D'])
-      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),

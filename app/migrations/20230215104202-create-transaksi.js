@@ -38,6 +38,12 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
+      catatan_guru: {
+        type: Sequelize.TEXT
+      },
+      catatan_petugas: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

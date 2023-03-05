@@ -10,18 +10,17 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.Kelas, {
+      this.hasMany(models.Kelas, {
         as: 'jurusan-kelas',
-        targetKey: 'id',
         foreignKey: 'jurusanId',
+        sourceKey: 'id',
         onUpdate: 'CASCADE',
-        onUpdate: 'CASCADE'
-      })
+        onDelete: 'CASCADE'
+      });
     }
   }
   Jurusan.init({
-    jurusan: DataTypes.STRING(30),
-    rombel: DataTypes.ENUM('A', 'B', 'C', 'D')
+    jurusan: DataTypes.STRING(30)
   }, {
     sequelize,
     modelName: 'Jurusan',

@@ -2,9 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const izin = require('./izin');
-const transaksi = require('./transaksi');
-const mapel = require('./mapel');
 module.exports = (sequelize, DataTypes) => {
   class Guru extends Model {
     /**
@@ -28,14 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       });
-
-      this.belongsTo(models.Mapel, {
-        as: 'guru-mapel',
-        targetKey: 'id',
-        foreignKey: 'mapelId',
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      });
     }
   }
   Guru.init({
@@ -47,7 +36,6 @@ module.exports = (sequelize, DataTypes) => {
     nama: DataTypes.STRING(30),
     username: DataTypes.STRING(30),
     password: DataTypes.STRING(30),
-    mapelId: DataTypes.INTEGER,
     role: {
       type: DataTypes.STRING(15),
       defaultValue: 'guru'

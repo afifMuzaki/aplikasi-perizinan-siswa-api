@@ -2,36 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Mapels', {
+    await queryInterface.createTable('KelasMapels', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      mapel: {
-        type: Sequelize.STRING(30)
-      },
       kelasId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Kelas',
-          key: 'id'
-        }
+        type: Sequelize.INTEGER
+      },
+      mapelId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Mapels');
+    await queryInterface.dropTable('KelasMapels');
   }
 };

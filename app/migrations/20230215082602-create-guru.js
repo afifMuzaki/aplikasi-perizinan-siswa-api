@@ -23,13 +23,6 @@ module.exports = {
       password: {
         type: Sequelize.STRING(30)
       },
-      mapelId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Mapels',
-          key: 'id'
-        }
-      },
       role: {
         type: Sequelize.STRING(15),
         defaultValue: 'guru'

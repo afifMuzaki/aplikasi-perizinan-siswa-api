@@ -7,15 +7,18 @@ module.exports = {
     [
       {
         kelas: 'XII',
-        jurusanId: 1
+        jurusanId: 1,
+        rombel: 'B'
       },
       {
         kelas: 'XII',
-        jurusanId: 2
+        jurusanId: 2,
+        rombel: 'C'
       },
       {
         kelas: 'XII',
-        jurusanId: 3
+        jurusanId: 3,
+        rombel: 'A'
       },
     ], {});
   },

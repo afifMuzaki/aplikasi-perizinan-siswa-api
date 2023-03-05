@@ -21,9 +21,9 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Kelas, {
         as: 'siswa-kelas',
         targetKey: 'id',
-        foreignKeyConstraint: 'kelasId',
+        foreignKey: 'kelasId',
         onUpdate: 'CASCADE',
-        onUpdate: 'CASCADE'
+        onDelete: 'CASCADE'
       });
     }
   }

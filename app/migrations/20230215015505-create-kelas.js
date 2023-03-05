@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       kelas: {
-        type: Sequelize.STRING(8)
+        type: Sequelize.STRING(15)
       },
       jurusanId: {
         type: Sequelize.INTEGER,
@@ -18,6 +18,9 @@ module.exports = {
           model: 'Jurusans',
           key: 'id'
         }
+      },
+      rombel: {
+        type: Sequelize.ENUM(['A', 'B', 'C', 'D'])
       },
       createdAt: {
         allowNull: false,
