@@ -5,7 +5,7 @@ const router = Router();
 const authCon = new Auth();
 
 router.post('/api/login', authCon.login);
-router.get('/api/logout', authCon.logout);
+router.all('/api/logout', authCon.logout);
 router.get('/api/refresh', authCon.refreshToken);
 
 module.exports = router;

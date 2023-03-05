@@ -11,7 +11,7 @@ class Petugas {
             res.json({
                 message: 'Semua izin',
                 data: izins
-            })
+            });
         } catch (err) {
             res.sendStatus(401);
             console.log(err);
@@ -27,8 +27,12 @@ class Petugas {
                 }
             });
 
-            res.json(izins);
-            if(izins.length == 0) return res.json({ message: 'Tidak ada izin yang perlu disetujui' });
+            if(izins.length < 1) return res.json({ message: 'Tidak ada izin yang perlu disetujui' });
+
+            res.json({
+                message: 'Semua izin',
+                data: izins
+            });
         } catch (err) {
             res.sendStatus(401);
             console.log(err);

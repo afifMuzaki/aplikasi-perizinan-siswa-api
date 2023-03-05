@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.hasOne(models.Transaksi, {
-        as: 'izin-kategori',
+        as: 'izin-transaksi',
         sourceKey: 'id',
         foreignKey: 'izinId',
         onUpdate: 'CASCADE',
@@ -59,7 +59,6 @@ module.exports = (sequelize, DataTypes) => {
 
   Izin.afterCreate(async (instance, option) => {
     const transaksi = sequelize.models.Transaksi;
-    const izin = sequelize.models.Izin
 
     const data = {
       izinId: instance.id,
@@ -70,5 +69,14 @@ module.exports = (sequelize, DataTypes) => {
     };
     await transaksi.create(data, { transaction: option.transaction });
   });
+
+  Izin.afterDestroy(async (instance, option) => {
+    const transaksi = sequelize.models.Transaksi;
+
+    console.log(instance.id);
+    await transaksi.destroy({ where: {
+      izinId: instance.id
+    } })
+  })
   return Izin;
 };
