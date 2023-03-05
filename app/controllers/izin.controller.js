@@ -3,6 +3,9 @@ const db = require("../models");
 const guruModel = db.Guru;
 const mapelModel = db.Mapel;
 const siswaModel = db.Siswa;
+const kelasModel = db.Kelas;
+const jurusanModel = db.Jurusan;
+const kategoriModel = db.Kategori;
 
 class Izin {
     async getAllGuru(req = request, res = response) {
@@ -30,14 +33,47 @@ class Izin {
     async getSiswaIdentity(req = request, res = response) {
         const kredensial = req.kredensial;
         try {
-            const identitas = await siswaModel.findAll({
+            const data = await siswaModel.findAll({
                 attributes: ['nama', 'kelasId'],
                 where: {
                     nis: kredensial
                 }
             });
 
-            res.json({identitas});
+            const namaSiswa = data[0].nama;
+            const kelasId = data[0].kelasId
+
+            const dataKelas = await kelasModel.findAll({
+                attributes: ['kelas', 'jurusanId', 'rombel'],
+                where: {
+                    id: kelasId
+                }
+            });
+
+            const jurusanId = dataKelas[0].jurusanId;
+
+            const dataJurusan = await jurusanModel.findAll({
+                attributes: ['jurusan'],
+                where: {
+                    id: jurusanId
+                }
+            });
+
+            const kelasSiswa = `${dataKelas[0].kelas} ${dataJurusan[0].jurusan} ${dataKelas[0].rombel}`
+
+            res.json({namaSiswa, kelasSiswa});
+        } catch (err) {
+            console.log(err);
+        }
+    }   
+    
+    async getAllCategory(req = request, res = response) {
+        try {
+            const categories = await kategoriModel.findAll({
+                attributes: ['id', 'kategori']
+            });
+
+            res.json({kategori: categories});
         } catch (err) {
             console.log(err);
         }
