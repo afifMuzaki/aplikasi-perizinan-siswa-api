@@ -1,5 +1,4 @@
 const { request, response } = require("express");
-const { where } = require("sequelize");
 const db = require("../models");
 const izinModel = db.Izin;
 
