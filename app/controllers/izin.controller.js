@@ -13,7 +13,7 @@ class Izin {
             const gurus = await guruModel.findAll({
                 attributes: ['nip', 'nama'],
             });
-            res.json({guru: gurus});
+            res.json(gurus);
         } catch (err) {
             console.log(err);
         }
@@ -24,7 +24,7 @@ class Izin {
             const mapels = await mapelModel.findAll({
                 attributes: ['id', 'mapel'],
             });
-            res.json({mapel: mapels});
+            res.json(mapels);
         } catch (err) {
             console.log(err);
         }
@@ -73,7 +73,7 @@ class Izin {
                 attributes: ['id', 'kategori']
             });
 
-            res.json({kategori: categories});
+            res.json(categories);
         } catch (err) {
             console.log(err);
         }
