@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Izin, {
-        as: 'transaksi-izin',
+        as: 'transaksiIzin',
         targetKey: 'id',
         foreignKey: 'izinId',
         onUpdate: 'CASCADE',
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.belongsTo(models.Guru, {
-        as: 'transaksi-guru',
+        as: 'transaksiGuru',
         targetKey: 'nip',
         foreignKey: 'guruNip',
         onUpdate: 'CASCADE',
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.belongsTo(models.Petugas, {
-        as: 'transaksi-petugas',
+        as: 'transaksiPetugas',
         targetKey: 'nip',
         foreignKey: 'petugasNip',
         onUpdate: 'CASCADE',
@@ -39,14 +39,13 @@ module.exports = (sequelize, DataTypes) => {
     izinId: DataTypes.INTEGER,
     guruNip: DataTypes.STRING,
     petugasNip: DataTypes.STRING,
-    izin_guru: DataTypes.BOOLEAN,
-    izin_petugas: DataTypes.BOOLEAN,
+    izin_guru: DataTypes.STRING,
+    izin_petugas: DataTypes.STRING,
     catatan_guru: DataTypes.TEXT,
     catatan_petugas: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Transaksi',
   });
-  module.exports = Transaksi;
   return Transaksi;
 };

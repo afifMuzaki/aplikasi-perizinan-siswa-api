@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Jurusan, {
-        as: 'kelas-jurusan',
+        as: 'kelasJurusan',
         foreignKey: 'jurusanId',
         targetKey: 'id',
         onUpdate: 'CASCADE',
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.hasMany(models.Siswa, {
-        as: 'kelas-siswa',
+        as: 'kelasSiswa',
         foreignKey: 'kelasId',
         sourceKey: 'id',
         onUpdate: 'CASCADE',

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.Siswa, {
-        as: 'izin-siswa',
+        as: 'izinSiswa',
         targetKey: 'nis',
         foreignKey: 'siswaNis',
         onUpdate: 'CASCADE',
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.belongsTo(models.Guru, {
-        as: 'izin-guru',
+        as: 'izinGuru',
         targetKey: 'nip',
         foreignKey: 'guruNip',
         onUpdate: 'CASCADE',
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.belongsTo(models.Kategori, {
-        as: 'izin-kategori',
+        as: 'izinKategori',
         targetKey: 'id',
         foreignKey: 'kategoriId',
         onUpdate: 'CASCADE',
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       this.hasOne(models.Transaksi, {
-        as: 'izin-transaksi',
+        as: 'izinTransaksi',
         sourceKey: 'id',
         foreignKey: 'izinId',
         onUpdate: 'CASCADE',
@@ -64,8 +64,8 @@ module.exports = (sequelize, DataTypes) => {
       izinId: instance.id,
       guruNip: instance.guruNip,
       petugasNip: null,
-      izin_guru: false,
-      izin_petugas: false
+      izin_guru: 'Proses',
+      izin_petugas: 'Proses'
     };
     await transaksi.create(data, { transaction: option.transaction });
   });

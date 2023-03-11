@@ -31,12 +31,12 @@ module.exports = {
         }
       },
       izin_guru: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+        type: Sequelize.STRING,
+        defaultValue: 'Proses'
       },
       izin_petugas: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
+        type: Sequelize.STRING,
+        defaultValue: 'Proses'
       },
       catatan_guru: {
         type: Sequelize.TEXT

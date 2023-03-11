@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.hasMany(models.Izin, {
-        as: 'kategori-izin',
+        as: 'kategoriIzin',
         sourceKey: 'id',
         foreignKey: 'kategoriId',
         onUpdate: 'CASCADE',
