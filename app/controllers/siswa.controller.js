@@ -1,11 +1,16 @@
 const { request, response } = require("express");
 const db = require("../models");
 const izinModel = db.Izin;
+const transaksiModel = db.Transaksi;
+const guruModel = db.Guru;
+const petugasModel = db.Petugas;
+const siswaModel = db.Siswa;
+const kelasModel = db.Kelas;
+const jurusanModel = db.Jurusan;
 
 class Siswa {
     async entriIzin(req = request, res = response) {
-        const { kredensial, username, role } = req;
-        if (role != 'siswa') return res.sendStatus(403);
+        const { kredensial } = req;
 
         const { nipGuru, idKategori, pelajaran, alasanIzin, waktuIzin, waktuKembali } = req.body;
 
@@ -27,84 +32,56 @@ class Siswa {
         }
     }
 
-    async getIzinByid(req = request, res = response) {
-        const izinId = req.params.id;
+    async riwayatIzin(req = request, res = response) {
+        const { kredensial } = req;
 
         try {
-            const izin = await izinModel.findAll({
-                attributes: ['siswaNis', 'guruNip', 'kategoriId', 'mapel', 'alasan', 'waktu_izin', 'waktu_kembali', 'tggl'],
+            const izins = await izinModel.findAll({
+                attributes: ['id', 'mapel', 'alasan', 'waktu_izin', 'waktu_kembali', 'tggl'],
                 where: {
-                    id: izinId
-                }
+                    siswaNis: kredensial,
+                },
+                include: [
+                    {
+                        as: 'izinTransaksi',
+                        model: transaksiModel,
+                        attributes: ['guruNip', 'petugasNip', 'izin_guru', 'izin_petugas', 'catatan_guru', 'catatan_petugas'],
+                        include: [
+                            {
+                                as: 'transaksiGuru',
+                                model: guruModel,
+                                attributes: ['nama']
+                            },
+                            {
+                                as: 'transaksiPetugas',
+                                model: petugasModel,
+                                attributes: ['nama']
+                            },
+                        ]
+                    },
+                    {
+                        as: 'izinSiswa',
+                        model: siswaModel,
+                        attributes: ['nama', 'nis'],
+                        include: [{
+                            as: 'siswaKelas',
+                            model: kelasModel,
+                            attributes: ['kelas', 'rombel'],
+                            include: [{
+                                as: 'kelasJurusan',
+                                model: jurusanModel,
+                                attributes: ['jurusan']
+                            }]
+                        }]
+                    }
+                ]
             });
 
-            if(!izin) return res.sendStatus(404);
-
-            res.json({
-                data: izin
-            });
+            res.json(izins);
         } catch (err) {
-            res.sendStatus(401);
             console.log(err);
         }
     }
-
-    async editIzin(req = request, res = response) {
-        const izinId = req.params.id;
-        const { nipGuru, idKategori, pelajaran, alasanIzin, waktuIzin, waktuKembali } = req.body;
-
-        try {
-            await izinModel.update({
-                siswaNis: kredensial,
-                guruNip: nipGuru,
-                kategoriId: idKategori,
-                mapel: pelajaran,
-                alasan: alasanIzin,
-                waktu_izin: waktuIzin,
-                waktu_kembali: waktuKembali
-            }, {
-                where: {
-                    id: izinId,
-                }
-            });
-
-            res.json({
-                message: 'Data telah diubah!'
-            })
-        } catch (err) {
-            res.sendStatus(401);
-            console.log(err);
-        }
-    }
-
-    async deleteIzinById(req = request, res = response) {
-        const izinId = req.params.id;
-
-        try {
-            await izinModel.destroy({
-                where:{
-                    id: izinId
-                }
-            });
-
-            res.json({
-                message: 'Izin telah dihapus'
-            })
-        } catch (err) {
-            res.sendStatus(401);
-            console.log(err);
-        }
-    }
-
-    // getAllIzins(req = request, res = response) {
-    //     izinModel.findAll({
-    //         attributes: ['siswaNis', 'guruNip', 'kategoriId', 'mapel', 'alasan', 'waktu_izin', 'waktu_kembali', 'tggl']
-    //     }).then(izins => {
-    //         res.json({ message: 'Data Izin', data: izins });
-    //     }).catch(err => {
-    //         console.log(err);
-    //     });
-    // }
 }
 
 module.exports = Siswa;

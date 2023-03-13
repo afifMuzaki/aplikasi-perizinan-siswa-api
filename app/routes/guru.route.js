@@ -8,5 +8,6 @@ const guruCon = new Guru();
 
 router.get('/api/guru/izins/request', verifyToken, checkGuru, guruCon.permintaanIzin);
 router.post('/api/guru/izins/verify', verifyToken, checkGuru, guruCon.persetujuanIzin);
+router.get('/api/guru/izins/history', verifyToken, checkGuru, guruCon.riwayatIzin);
 
 module.exports = router;

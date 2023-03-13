@@ -7,9 +7,6 @@ const router = Router();
 const siswaCon = new Siswa();
 
 router.post('/api/siswa/izin', verifyToken, checkSiswa, siswaCon.entriIzin);
-// router.route('/api/siswa/izin/:id')
-router.get('/api/siswa/izin/:id', verifyToken, checkSiswa, siswaCon.getIzinByid)
-router.put('/api/siswa/izin/:id', verifyToken, checkSiswa, siswaCon.editIzin)
-router.delete('/api/siswa/izin/:id', verifyToken, checkSiswa, siswaCon.deleteIzinById);
+router.get('/api/siswa/izins/history', verifyToken, checkSiswa, siswaCon.riwayatIzin);
 
 module.exports = router;
