@@ -12,7 +12,25 @@ module.exports = {
       },
       {
         jurusan: 'TPM'
-      }
+      },
+      {
+        jurusan: 'TPTU'
+      },
+      {
+        jurusan: 'LAS'
+      },
+      {
+        jurusan: 'TBSM'
+      },
+      {
+        jurusan: 'BKP'
+      },
+      {
+        jurusan: 'OI'
+      },
+      {
+        jurusan: 'EI'
+      },
     ], {});
   },
 

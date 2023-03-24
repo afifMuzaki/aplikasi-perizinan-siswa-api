@@ -6,6 +6,8 @@ const siswaModel = db.Siswa;
 const kelasModel = db.Kelas;
 const jurusanModel = db.Jurusan;
 const kategoriModel = db.Kategori;
+const transModel = db.Transaksi;
+const izinModel = db.Izin;
 
 class Izin {
     async getAllGuru(req = request, res = response) {

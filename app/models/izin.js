@@ -51,7 +51,10 @@ module.exports = (sequelize, DataTypes) => {
     alasan: DataTypes.TEXT,
     waktu_izin: DataTypes.TIME,
     waktu_kembali: DataTypes.TIME,
-    tggl: DataTypes.DATE
+    tggl: {
+      type: DataTypes.DATE,
+      defaultValue: new Date()
+    }
   }, {
     sequelize,
     modelName: 'Izin',

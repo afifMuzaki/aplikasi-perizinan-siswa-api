@@ -43,11 +43,9 @@ module.exports = {
         type: Sequelize.TIME
       },
       tggl: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-        get() {
-          return this.getDataValue('tggl').toLocaleString('en-US', {timZone: 'Asia/Jakarta'});
-        }
+        allowNull: false,
+        type: Sequelize.DATEONLY,
+        defaultValue: new Date()
       },
       createdAt: {
         allowNull: false,

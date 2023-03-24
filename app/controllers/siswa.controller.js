@@ -1,4 +1,5 @@
 const { request, response } = require("express");
+const { sequelize } = require("../models");
 const db = require("../models");
 const izinModel = db.Izin;
 const transaksiModel = db.Transaksi;
@@ -22,7 +23,7 @@ class Siswa {
                 mapel: pelajaran,
                 alasan: alasanIzin,
                 waktu_izin: waktuIzin,
-                waktu_kembali: waktuKembali
+                waktu_kembali: waktuKembali,
             });
 
             res.send('Izin sedang diajukan, silahkan tunggu persetujuan');

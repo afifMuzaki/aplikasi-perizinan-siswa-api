@@ -12,6 +12,9 @@ module.exports = {
       kategori: {
         type: Sequelize.STRING(20)
       },
+      deskripsi: {
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),

@@ -116,6 +116,52 @@ class Petugas {
             console.log(err);
         }
     }
+
+    async getIzinById(req = request, res = response) {
+        const { izinId } = req.body;
+
+        try {
+            const izin = await transaksiModel.findAll({
+                attributes: ['id', 'izinId', 'izin_guru', 'izin_petugas', 'catatan_guru', 'catatan_petugas'],
+                where: { id: izinId },
+                include: [
+                    {
+                        as: 'transaksiIzin',
+                        model: izinModel,
+                        attributes: [
+                            'id', 'siswaNis', 'mapel', 'alasan', 'waktu_izin', 'waktu_kembali', 'tggl'
+                        ], include: [{
+                            as: 'izinSiswa',
+                            model: siswaModel,
+                            attributes: ['nama', 'kelasId'],
+                            include: [{
+                                as: 'siswaKelas',
+                                model: kelasModel,
+                                attributes: ['kelas', 'jurusanId', 'rombel'],
+                                include: [{
+                                    as: 'kelasJurusan',
+                                    model: jurusanModel,
+                                    attributes: ['jurusan']
+                                }]
+                            }]
+                        }],
+                    }, {
+                        as: 'transaksiGuru',
+                        model: guruModel,
+                        attributes: ['nama']
+                    }, {
+                        as: 'transaksiPetugas',
+                        model: petugasModel,
+                        attributes: ['nama']
+                    }
+                ],
+            });
+
+            res.json(izin);
+        } catch (err) {
+            console.log(err);
+        }
+    }
 }
 
 module.exports = Petugas;

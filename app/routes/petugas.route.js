@@ -8,6 +8,7 @@ const petugasCon = new Petugas();
 
 router.get('/api/petugas/izins/request', verifyToken, checkPetugas, petugasCon.permintaanIzin);
 router.post('/api/petugas/izins/verify', verifyToken, checkPetugas, petugasCon.persetujuanIzin);
-router.get('/api/petugas/izins/history', verifyToken, checkPetugas, petugasCon.riwayatIzin)
+router.get('/api/petugas/izins/history', verifyToken, checkPetugas, petugasCon.riwayatIzin);
+router.get('/api/petugas/izins/print', verifyToken, checkPetugas, petugasCon.getIzinById);
 
 module.exports = router;

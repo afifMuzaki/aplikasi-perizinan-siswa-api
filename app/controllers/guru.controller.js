@@ -14,22 +14,63 @@ class Guru {
 
         try {
             const izins = await transaksiModel.findAll({
-                attributes: ['id', 'izinId', 'izin_guru', 'izin_petugas', 'catatan_guru', 'catatan_petugas'],
+                attributes: ['id'],
                 where: { guruNip: guruNip, izin_guru: 'Proses' },
                 include: [
                     {
                         as: 'transaksiIzin',
                         model: izinModel,
                         attributes: [
-                            'id', 'siswaNis', 'mapel', 'alasan', 'waktu_izin', 'waktu_kembali', 'tggl'
+                            'alasan', 'tggl'
                         ], include: [{
                             as: 'izinSiswa',
                             model: siswaModel,
-                            attributes: ['nama', 'kelasId'],
+                            attributes: ['nama'],
                             include: [{
                                 as: 'siswaKelas',
                                 model: kelasModel,
-                                attributes: ['kelas', 'jurusanId', 'rombel'],
+                                attributes: ['kelas', 'rombel'],
+                                include: [{
+                                    as: 'kelasJurusan',
+                                    model: jurusanModel,
+                                    attributes: ['jurusan']
+                                }]
+                            }]
+                        }],
+                    }
+                ],
+            });
+
+            if (izins.length < 1) return res.json([{ status: 'tidak ada', message: 'Tidak ada izin yang perlu disetujui!' }]);
+
+            res.json(izins);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async getIzinById(req = request, res = response) {
+        const guruNip = req.kredensial;
+        const { id } = req.params;
+
+        try {
+            const izins = await transaksiModel.findAll({
+                attributes: ['id', 'izinId', 'izin_guru', 'izin_petugas', 'catatan_guru', 'catatan_petugas'],
+                where: { id: id },
+                include: [
+                    {
+                        as: 'transaksiIzin',
+                        model: izinModel,
+                        attributes: [
+                            'siswaNis', 'mapel', 'alasan', 'waktu_izin', 'waktu_kembali', 'tggl'
+                        ], include: [{
+                            as: 'izinSiswa',
+                            model: siswaModel,
+                            attributes: ['nama'],
+                            include: [{
+                                as: 'siswaKelas',
+                                model: kelasModel,
+                                attributes: ['kelas', 'rombel'],
                                 include: [{
                                     as: 'kelasJurusan',
                                     model: jurusanModel,
@@ -49,8 +90,6 @@ class Guru {
                 ],
             });
 
-            if (izins.length < 1) return res.json([{ status: 'tidak ada', message: 'Tidak ada izin yang perlu disetujui!' }]);
-
             res.json(izins);
         } catch (err) {
             console.log(err);
@@ -59,10 +98,10 @@ class Guru {
 
     async persetujuanIzin(req = request, res = response) {
         const { kredensial } = req;
-        const { status, idTrans } = req.body;
+        const { status, idTrans, catatan } = req.body;
 
         try {
-            await transaksiModel.update({ guruNip: kredensial, izin_guru: status }, {
+            await transaksiModel.update({ guruNip: kredensial, izin_guru: status, catatan_guru: catatan }, {
                 where: {
                     id: idTrans
                 }

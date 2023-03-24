@@ -7,6 +7,7 @@ const router = Router();
 const guruCon = new Guru();
 
 router.get('/api/guru/izins/request', verifyToken, checkGuru, guruCon.permintaanIzin);
+router.get('/api/guru/izins/request/:id', verifyToken, checkGuru, guruCon.getIzinById)
 router.post('/api/guru/izins/verify', verifyToken, checkGuru, guruCon.persetujuanIzin);
 router.get('/api/guru/izins/history', verifyToken, checkGuru, guruCon.riwayatIzin);
 

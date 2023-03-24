@@ -6,15 +6,27 @@ module.exports = {
     await queryInterface.bulkInsert('Mapels', [
       {
         mapel: 'Matematika',
-        kelasId: 1,
+        kelasId: 4,
       },
       {
         mapel: 'Bahasa Inggris',
-        kelasId: 1,
+        kelasId: 4,
       },
       {
         mapel: 'PPKn',
-        kelasId: 1,
+        kelasId: 4,
+      },
+      {
+        mapel: 'Bahasa Indonesia',
+        kelasId: 4,
+      },
+      {
+        mapel: 'Basa Jawa',
+        kelasId: 4,
+      },
+      {
+        mapel: 'PAI',
+        kelasId: 4,
       },
     ], {});
   },

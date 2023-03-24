@@ -8,17 +8,47 @@ module.exports = {
       {
         kelas: 'XII',
         jurusanId: 1,
+        rombel: 'A'
+      },
+      {
+        kelas: 'XI',
+        jurusanId: 1,
+        rombel: 'A'
+      },
+      {
+        kelas: 'X',
+        jurusanId: 1,
+        rombel: 'A'
+      },
+      {
+        kelas: 'XII',
+        jurusanId: 1,
+        rombel: 'B'
+      },
+      {
+        kelas: 'XI',
+        jurusanId: 1,
+        rombel: 'B'
+      },
+      {
+        kelas: 'X',
+        jurusanId: 1,
         rombel: 'B'
       },
       {
         kelas: 'XII',
-        jurusanId: 2,
+        jurusanId: 1,
         rombel: 'C'
       },
       {
-        kelas: 'XII',
-        jurusanId: 3,
-        rombel: 'A'
+        kelas: 'XI',
+        jurusanId: 1,
+        rombel: 'C'
+      },
+      {
+        kelas: 'X',
+        jurusanId: 1,
+        rombel: 'C'
       },
     ], {});
   },
